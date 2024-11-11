@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /*background: linear-gradient(111.6deg, rgb(217, 111, 111) 0.4%, rgb(34, 14, 215) 100.3%);
+    background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));*/
+    background: radial-gradient(circle at 52.1% -29.6%, rgb(144, 17, 105) 0%, rgb(51, 0, 131) 100.2%);
+    color: #fff;
+    width: 100vw;
+    height: 100vh;
+}
+
+h1, h2 {
+    color: #ffb32c;
+}
+
+h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    transition: all 1s ease-out;
+}
+
+.button {
+    padding: 15px 25px;
+    background-color: #ffb32c;
+    color: #330083FF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 26px;
+    transition: all .5s ease-out;
+}
+
+.button:hover {
+    background-color: #d5930d;
+}
+
+.answer .button {
+    background-color: #fff;
+}
+
+.answer .button:hover {
+    background-color: #c7c7c7;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: calc(100vh - 20px);
+    padding-top: 20px;
+}
+
+.question {
+    font-size: 24px;
+    line-height: 35px;
+    text-align: center;
+    width: 61%;
+}
+
+.result {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: #fff;
+    width: 100vw;
+    height: 100vh;
+    font-size: 30px;
+    line-height: 40px;
+    transition: all .2s ease-out;
+}
+
+.number-input, .text-input {
+    width: 400px;
+    padding: 10px;
+    margin-right: 30px;
+    font-size: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.answer-money .number-input {
+    width: 150px;
+    margin-right: 10px;
+}
+
+.answer-number {
+    display: flex;
+    justify-content: center;
+}
+
+.countdown {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    color: #fff;
+    font-size: 40px;
+    line-height: 40px;
+    transition: all .2s ease-out;
+}
+
+.school {
+    position: fixed;
+    top: 20px;
+    right: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+}
+
+img {
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.final-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: #330083FF;
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.station-result > div, .station-name > div {
+    border: 1px solid #330083FF;
+    padding: 10px;
+}

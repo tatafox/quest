@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математический Веб-Квест</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Математический Веб-Квест</h1>
+        <h2 style="display: none; opacity: 0;"></h2>
+        <p class="question" id="question">Уважаемые участники игры! Сегодня Вы будете путешествовать по станциям. Для успешного путешествия и продвижения к намеченной цели вам понадобятся знания по математике, находчивость, смекалка и сплоченность, а также ваш жизненный опыт, который вы преобрели, хотя он ещё маленький, но вспоминайте - может ответы на вопросы вы уже слышили в повседневной жизни.</p>
+        <img class="question-img" id="questionImg" src="./img/1.jpg" style="display:none; opacity: 0;">
+        <button class="button"  id="start">Начать квест</button>
+        <div class="task" id="task" style="display:none; opacity: 0;">
+            <div class="answer" id="answerDay" style="display:none; opacity: 0;">
+                <input type="button" value="понедельник" class="button" />
+                <input type="button" value="вторник" class="button" />
+                <input type="button" value="среда" class="button" />
+                <input type="button" value="четверг" class="button" />
+                <input type="button" value="пятница" class="button" />
+                <input type="button" value="суббота" class="button" />
+                <input type="button" value="воскресенье" class="button" />
+            </div>
+            <div class="answer" id="answerBoolean" style="display:none; opacity: 0;">
+                <input type="button" value="хватит" class="button" />
+                <input type="button" value="не хватит" class="button" />
+            </div>
+            <div class="answer-number answer" id="answerNumber" style="display:none; opacity: 0;">
+                <input class="number-input" type="number">
+                <button id="answerNumberBtn" class="button" >Проверить</button>
+            </div>
+            <div class="answer-text answer" id="answerText" style="display:none; opacity: 0;">
+                <input class="text-input" type="text">
+                <button id="answerTextBtn" class="button" >Проверить</button>
+            </div>
+            <div class="answer-money answer" id="answerMoney" style="display:none; opacity: 0;">
+                <input class="number-input" type="number">
+                <span>рублей</span>
+                <input class="number-input" type="number">
+                <span>копеек</span>
+                <button id="answerMoneyBtn" class="button" >Проверить</button>
+            </div>
+            <p class="result" id="result"></p>
+        </div>
+        <div class="final-result" id="finalResult" style="display:none; opacity: 0;">
+            <div class="station-name" id="stationName">
+                <div>Название станции</div>
+                <div>Считалка</div>
+                <div>Задачкина</div>
+                <div>Ребусная</div>
+                <div>Заморочки из бочки</div>
+                <div>Итог</div>
+            </div>
+            <div class="station-result" id="stationResult">
+                <div>Баллы</div>
+            </div>
+        </div>
+    </div>
+    <div id="countdown" class="countdown" style="display:none;">
+        <span class="minutes countdown-time"></span>
+        <span class="countdown-time">:</span>
+        <span class="seconds countdown-time"></span>
+    </div>
+    <div id="school" class="school">
+        ГУО «Средняя школа №16 Г. Борисова имени И.В. Борисюка»
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
