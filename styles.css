@@ -161,6 +161,7 @@ img {
 
 .bg {
     position: fixed;
+    z-index: -1;
     width: 215px;
     height: auto;
 }
@@ -173,4 +174,14 @@ img {
 .bg-2 {
     bottom: 50px;
     right: 50px;
+}
+
+.bg-3 {
+    top: 50px;
+    right: 50px;
+}
+
+.bg-4 {
+    bottom: 50px;
+    left: 50px;
 }

@@ -15,6 +15,8 @@ let answerStation = [];
 
 let stationNumber = 0;
 let taskNumber = 0;
+let bgNumber = 3;
+let bgClassNumber = 3;
 let firstScreen = true;
 let timeinterval;
 const stationName = document.querySelector('h2');
@@ -24,12 +26,31 @@ const finalResultElement = document.getElementById('finalResult');
 const questionElement = document.getElementById('question');
 const startBtn = document.getElementById('start');
 
+function changeBg(double = false) {
+    if (!double && (stationNumber === 2 || stationNumber === 3)) {
+        return;
+    }
+
+    const bgArray = Array.from(document.querySelectorAll('.bg'));
+    bgArray[0].src = `img/bg-0${bgNumber}.png`;
+    bgArray[0].classList = `bg bg-${bgClassNumber}`;
+    bgNumber = bgNumber === 24 ? 1 : bgNumber + 1;
+    bgClassNumber = bgClassNumber === 4 ? 1 : bgClassNumber + 1;
+    bgArray[1].src = double ? `img/bg-0${bgNumber}.png` : '';
+    if (double) {
+        bgArray[1].classList = `bg bg-${bgClassNumber}`;
+        bgNumber = bgNumber === 24 ? 1 : bgNumber + 1;
+        bgClassNumber = bgClassNumber === 4 ? 1 : bgClassNumber + 1;
+    }
+}
+
 function changeStation() {
     stationName.style.opacity = '0';
     questionElement.style.opacity = '0';
     startBtn.style.opacity = '0';
     questionElement.style.display = 'block';
     startBtn.style.display = 'block';
+    changeBg(true);
 
     /*if (stationNumber === 2) {
         taskElement.style.display = 'none';
@@ -122,6 +143,8 @@ function startTask() {
     const answerMoneyElement = document.getElementById('answerMoney');
     const answerBooleanElement = document.getElementById('answerBoolean');
     const questionImg = document.getElementById(`questionImg`);
+
+    changeBg();
 
     if (taskNumber === 0) {
         taskElement.style.display = 'block';
@@ -349,7 +372,7 @@ function stopStation(endTime = false) {
     setTimeout(() => {
         let innerText = `Вы заработали ${sum} балл`;
 
-        if (5 < sum > 1 ) {
+        if (sum > 1  && sum < 5) {
             innerText += 'а';
         } else if (sum > 4  || sum === 0) {
             innerText += 'ов';
