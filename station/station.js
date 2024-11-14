@@ -60,7 +60,10 @@ export const station = [
         }
     ],
     [
-        {}
+        {
+            question: '',
+            answer: 'true',
+        },
     ],
     [
         {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://unpkg.com/konva@9.3.16/konva.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Математический Веб-Квест</title>
@@ -13,6 +14,7 @@
         <p class="question" id="question">Уважаемые участники игры! Сегодня Вы будете путешествовать по станциям. Для успешного путешествия и продвижения к намеченной цели вам понадобятся знания по математике, находчивость, смекалка и сплоченность, а также ваш жизненный опыт, который вы преобрели, хотя он ещё маленький, но вспоминайте - может ответы на вопросы вы уже слышили в повседневной жизни.</p>
         <img class="question-img" id="questionImg" src="./img/1.jpg" style="display:none; opacity: 0;">
         <button class="button"  id="start">Начать квест</button>
+        <div id="konva-container"></div>
         <div class="task" id="task" style="display:none; opacity: 0;">
             <div class="answer" id="answerDay" style="display:none; opacity: 0;">
                 <input type="button" value="понедельник" class="button" />

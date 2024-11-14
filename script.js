@@ -3,7 +3,7 @@ import {station} from './station/station.js';
 const STATION_NAME = ['Станция Считалка', 'Станция Задачкина', 'Станция Архитектурная', 'Станция Ребусная', 'Станция Заморочки из бочки'];
 const STATION_TEXT = ['Добро пожаловать на Станцию Считалку! Вам нужно быстро отвечать на вопросы. За каждый правильный  ответ команда получает по 1 баллу. На выполнение всех заданий вам дается 10 минут. Вы готовы?',
     'Добро пожаловать на Станцию Задачкину. На данном этапе надо решить задачи. За каждое правильное решенное выражения вы получаете по 3 балла. На выполнениевам дается 7 минут.',
-    'Вы прибыли на станцию Архитектурную. У бабушки Кати есть собака Тузик. Необходимо перемащая геометрические фигуры построить собачий домик. На выполнение задания у вас 7 минут.',
+    'Вы прибыли на станцию Архитектурную. У бабушки Кати есть собака Тузик. Необходимо перемащая цветные геометрические фигуры собрать собачий домик по его тени. На выполнение задания у вас 5 минут. За выполнение этого задания вы получите 10 баллов',
     'Станция Ребусная. Нужно решить математические ребусы. За каждый ответ  2 балла. У вас есть 10 минут',
     'Станция Заморочки из бочки. Вас ждут математические загадки. За каждый ответ 1 балл. У вас есть 5 минут.'];
 const STATION_BTN_NAME = 'Приступить к заданию'
@@ -31,9 +31,17 @@ function changeStation() {
     questionElement.style.display = 'block';
     startBtn.style.display = 'block';
 
-    if (stationNumber === 2) {
+    /*if (stationNumber === 2) {
+        taskElement.style.display = 'none';
+        taskElement.style.opacity = '0';
+        questionElement.style.display = 'none';
+        questionElement.style.opacity = '0';
+        startBtn.style.display = 'none';
+        startBtn.style.opacity = '0';
+        drawKonva();
+        return
         stationNumber += 1;
-    }
+    }*/
 
     setTimeout(() => {
         if (stationNumber >= STATION_COUNT) {
@@ -156,9 +164,18 @@ function startTask() {
             answerNumberElement.style.opacity = '1';
         }
     } else if (stationNumber === 2) {
-        stationNumber += 1;
+        //return;
+        taskElement.style.display = 'none';
+        taskElement.style.opacity = '0';
+        questionElement.style.display = 'none';
+        questionElement.style.opacity = '0';
+        startBtn.style.display = 'none';
+        startBtn.style.opacity = '0';
+        setTimer(5);
+        drawKonva();
+        /*stationNumber += 1;
         firstScreen = true;
-        changeStation();
+        changeStation();*/
     } else if (stationNumber === 3) {
 
         if (taskNumber === 0) {
@@ -246,6 +263,8 @@ function checkAnswer(userAnswer) {
 
    if (stationNumber === 1) {
        point = 3;
+   } else if (stationNumber === 2) {
+       point = 10;
    } else if (stationNumber === 3) {
        point = 2;
    }
@@ -305,9 +324,11 @@ function setTimer(minutesRemaining) {
 
 function stopStation(endTime = false) {
     const clock = document.getElementById('countdown');
+    const konvaContainer = document.getElementById('konva-container');
 
     clearInterval(timeinterval);
     clock.style.display = 'none';
+    konvaContainer.style.display = 'none';
     hideAnswer();
 
     questionElement.style.opacity = '0';
@@ -324,15 +345,15 @@ function stopStation(endTime = false) {
     questionElement.style.display = 'block';
 
     setTimeout(() => {
-        let innerText = `Вы заработали ${sum} балл!`;
+        let innerText = `Вы заработали ${sum} балл`;
 
         if (5 < sum > 1 ) {
             innerText += 'а';
-        } else if (sum > 4 ) {
+        } else if (sum > 4  || sum === 0) {
             innerText += 'ов';
         }
 
-        innerText = endTime ? 'Время вышло!'+innerText :'Поздравляем!'+innerText ;
+        innerText = endTime ? 'Время вышло! ' + innerText :'Поздравляем!  ' + innerText ;
         questionElement.innerText = innerText;
         startBtn.innerText = 'Следующая станция';
         firstScreen = true;
@@ -343,4 +364,197 @@ function stopStation(endTime = false) {
         stationNumber += 1;
         taskNumber = 0;
     },200);
+}
+
+function drawKonva() {
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    function loadImages(sources, callback) {
+        var assetDir = '/assets/';
+        var images = {};
+        var loadedImages = 0;
+        var numImages = 0;
+        for (var src in sources) {
+            numImages++;
+        }
+        for (var src in sources) {
+            images[src] = new Image();
+            images[src].onload = function () {
+                if (++loadedImages >= numImages) {
+                    callback(images);
+                }
+            };
+            images[src].src = assetDir + sources[src];
+        }
+    }
+    function isNearOutline(animal, outline) {
+        var a = animal;
+        var o = outline;
+        var ax = a.x();
+        var ay = a.y();
+
+        if (ax > o.x - 20 && ax < o.x + 20 && ay > o.y - 20 && ay < o.y + 20) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function initStage(images) {
+        var stage = new Konva.Stage({
+            container: 'konva-container',
+            width: 400,
+            height: 300,
+        });
+        var animalLayer = new Konva.Layer();
+        var animalShapes = [];
+        var score = 0;
+
+        // image positions
+        var animals = {
+            snake: { //4 55*97
+                x: 20,
+                y: 20,
+            },
+            giraffe: { //3 104*50
+                x: 250,
+                y: 180,
+            },
+            monkey: { // 1 151*77
+                x: 220,
+                y: 40,
+            },
+            lion: { //2 97*97
+                x: 100,
+                y: 20
+            },
+            cat: { //5 49*48
+                x: 250,
+                y: 250,
+            },
+        };
+
+        var outlines = {
+            snake_black: { //4 55*97
+                x: 20,
+                y: 203,
+            },
+            giraffe_black: { //3 104*50
+                x: 20,
+                y: 203,
+            },
+            monkey_black: { // 1 151*77
+                x: 20,
+                y: 129,
+            },
+            lion_black: { //2 97*97
+                x: 75,
+                y: 204,
+            },
+            cat_black: { //5 49*48
+                x: 122,
+                y: 250,
+            },
+        };
+
+        // create draggable animals
+        for (var key in animals) {
+            // anonymous function to induce scope
+            (function () {
+                var privKey = key;
+                var anim = animals[key];
+
+                var animal = new Konva.Image({
+                    image: images[key],
+                    x: anim.x,
+                    y: anim.y,
+                    draggable: true,
+                });
+
+                animal.on('dragstart', function () {
+                    this.moveToTop();
+                });
+                /*
+                 * check if animal is in the right spot and
+                 * snap into place if it is
+                 */
+                animal.on('dragend', function () {
+                    var outline = outlines[privKey + '_black'];
+                    if (!animal.inRightPlace && isNearOutline(animal, outline)) {
+                        animal.position({
+                            x: outline.x,
+                            y: outline.y,
+                        });
+                        animal.inRightPlace = true;
+
+                        if (++score >= 5) {
+                            console.log('!!!!!!!!!!!!')
+                            checkAnswer('true');
+                        }
+
+                        // disable drag and drop
+                        setTimeout(function () {
+                            animal.draggable(false);
+                        }, 50);
+                    }
+                });
+                // make animal glow on mouseover
+                animal.on('mouseover', function () {
+                    animal.image(images[privKey + '_glow']);
+                    document.body.style.cursor = 'pointer';
+                });
+                // return animal on mouseout
+                animal.on('mouseout', function () {
+                    animal.image(images[privKey]);
+                    document.body.style.cursor = 'default';
+                });
+
+                animal.on('dragmove', function () {
+                    document.body.style.cursor = 'pointer';
+                });
+
+                animalLayer.add(animal);
+                animalShapes.push(animal);
+            })();
+        }
+
+        // create animal outlines
+        for (var key in outlines) {
+            // anonymous function to induce scope
+            (function () {
+                var imageObj = images[key];
+                var out = outlines[key];
+
+                var outline = new Konva.Image({
+                    image: imageObj,
+                    x: out.x,
+                    y: out.y,
+                });
+
+                animalLayer.add(outline);
+            })();
+        }
+
+        stage.add(animalLayer);
+    }
+
+    var sources = {
+        snake: '4.png',
+        snake_glow: '4-glow.png',
+        snake_black: '4-black.png',
+        lion: '2.png',
+        lion_glow: '2-glow.png',
+        lion_black: '2-black.png',
+        monkey: '1.png',
+        monkey_glow: '1-glow.png',
+        monkey_black: '1-black.png',
+        giraffe: '3.png',
+        giraffe_glow: '3-glow.png',
+        giraffe_black: '3-black.png',
+        cat: '5.png',
+        cat_glow: '5-glow.png',
+        cat_black: '5-black.png',
+    };
+    loadImages(sources, initStage);
 }
