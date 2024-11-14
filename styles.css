@@ -63,7 +63,9 @@ h2 {
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: calc(100vh - 20px);
+    box-sizing: border-box;
+    padding: 0 100px;
+    height: 100vh;
     padding-top: 20px;
 }
 
@@ -147,7 +149,28 @@ img {
     line-height: 40px;
 }
 
+#answerDay {
+    display: flex;
+    gap: 10px;
+}
+
 .station-result > div, .station-name > div {
     border: 1px solid #330083FF;
     padding: 10px;
+}
+
+.bg {
+    position: fixed;
+    width: 215px;
+    height: auto;
+}
+
+.bg-1 {
+    top: 50px;
+    left: 50px;
+}
+
+.bg-2 {
+    bottom: 50px;
+    right: 50px;
 }

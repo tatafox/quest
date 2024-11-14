@@ -138,7 +138,7 @@ function startTask() {
 
     if (stationNumber === 0) {
         if (taskNumber === 0) {
-            answerDayElement.style.display = 'block';
+            answerDayElement.style.display = 'flex';
             answerDayElement.style.opacity = '1';
             setTimer(10);
         } else if (taskNumber === 6) {
