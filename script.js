@@ -2,7 +2,7 @@ import {station} from './station/station.js';
 
 const STATION_NAME = ['Станция Считалка', 'Станция Задачкина', 'Станция Архитектурная', 'Станция Ребусная', 'Станция Заморочки из бочки'];
 const STATION_TEXT = ['Добро пожаловать на Станцию Считалку! Вам нужно быстро отвечать на вопросы. За каждый правильный  ответ команда получает по 1 баллу. На выполнение всех заданий вам дается 10 минут. Вы готовы?',
-    'Добро пожаловать на Станцию Задачкину. На данном этапе надо решить задачи. За каждое правильное решенное выражения вы получаете по 3 балла. На выполнениевам дается 7 минут.',
+    'Добро пожаловать на Станцию Задачкину. На данном этапе надо решить задачи. За каждое правильное решенное выражения вы получаете по 3 балла. На выполнение вам дается 7 минут.',
     'Вы прибыли на станцию Архитектурную. У бабушки Кати есть собака Тузик. Необходимо перемащая цветные геометрические фигуры собрать собачий домик по его тени. На выполнение задания у вас 5 минут. За выполнение этого задания вы получите 10 баллов',
     'Станция Ребусная. Нужно решить математические ребусы. За каждый ответ  2 балла. У вас есть 10 минут',
     'Станция Заморочки из бочки. Вас ждут математические загадки. За каждый ответ 1 балл. У вас есть 5 минут.'];
@@ -164,18 +164,15 @@ function startTask() {
             answerNumberElement.style.opacity = '1';
         }
     } else if (stationNumber === 2) {
-        //return;
         taskElement.style.display = 'none';
         taskElement.style.opacity = '0';
         questionElement.style.display = 'none';
         questionElement.style.opacity = '0';
         startBtn.style.display = 'none';
         startBtn.style.opacity = '0';
+
         setTimer(5);
         drawKonva();
-        /*stationNumber += 1;
-        firstScreen = true;
-        changeStation();*/
     } else if (stationNumber === 3) {
 
         if (taskNumber === 0) {
@@ -197,11 +194,11 @@ function startTask() {
         hideAnswer();
 
         if (taskNumber === 1 || taskNumber === 2 || taskNumber === 7) {
-            answerTextElement.style.display = 'block';
-            answerTextElement.style.opacity = '1';
-        } else {
             answerNumberElement.style.display = 'block';
             answerNumberElement.style.opacity = '1';
+        } else {
+            answerTextElement.style.display = 'block';
+            answerTextElement.style.opacity = '1';
         }
 
         questionImg.src = station[stationNumber][taskNumber].question;
@@ -324,11 +321,16 @@ function setTimer(minutesRemaining) {
 
 function stopStation(endTime = false) {
     const clock = document.getElementById('countdown');
-    const konvaContainer = document.getElementById('konva-container');
 
     clearInterval(timeinterval);
-    clock.style.display = 'none';
-    konvaContainer.style.display = 'none';
+
+    if (stationNumber === 2) {
+        const konvaContainer = document.getElementById('konva-container');
+
+        clock.style.display = 'none';
+        konvaContainer.style.display = 'none';
+    }
+
     hideAnswer();
 
     questionElement.style.opacity = '0';
