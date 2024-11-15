@@ -9,6 +9,24 @@ const STATION_TEXT = ['Добро пожаловать на Станцию Сч�
 const STATION_BTN_NAME = 'Приступить к заданию'
 const STATION_COUNT = 5;
 
+const sources = {
+    snake: '4.png',
+    snake_glow: '4-glow.png',
+    snake_black: '4-black.png',
+    lion: '2.png',
+    lion_glow: '2-glow.png',
+    lion_black: '2-black.png',
+    monkey: '1.png',
+    monkey_glow: '1-glow.png',
+    monkey_black: '1-black.png',
+    giraffe: '3.png',
+    giraffe_glow: '3-glow.png',
+    giraffe_black: '3-black.png',
+    cat: '5.png',
+    cat_glow: '5-glow.png',
+    cat_black: '5-black.png',
+};
+
 const ANSWER = [];
 const ANSWER_SUM = [];
 let answerStation = [];
@@ -25,6 +43,15 @@ const taskElement = document.getElementById('task');
 const finalResultElement = document.getElementById('finalResult');
 const questionElement = document.getElementById('question');
 const startBtn = document.getElementById('start');
+
+
+const assetImgDiv = document.getElementById('assets');
+
+for (const src in sources) {
+    const assetImg = document.createElement('img');
+    assetImg.src = 'img/assets/' + sources[src];
+    assetImgDiv.appendChild(assetImg)
+}
 
 function changeBg(double = false) {
     if (!double && (stationNumber === 2 || stationNumber === 3)) {
@@ -396,7 +423,7 @@ function drawKonva() {
     var height = window.innerHeight;
 
     function loadImages(sources, callback) {
-        var assetDir = '/assets/';
+        var assetDir = 'img/assets/';
         var images = {};
         var loadedImages = 0;
         var numImages = 0;
@@ -563,23 +590,5 @@ function drawKonva() {
 
         stage.add(animalLayer);
     }
-
-    var sources = {
-        snake: '4.png',
-        snake_glow: '4-glow.png',
-        snake_black: '4-black.png',
-        lion: '2.png',
-        lion_glow: '2-glow.png',
-        lion_black: '2-black.png',
-        monkey: '1.png',
-        monkey_glow: '1-glow.png',
-        monkey_black: '1-black.png',
-        giraffe: '3.png',
-        giraffe_glow: '3-glow.png',
-        giraffe_black: '3-black.png',
-        cat: '5.png',
-        cat_glow: '5-glow.png',
-        cat_black: '5-black.png',
-    };
     loadImages(sources, initStage);
 }
