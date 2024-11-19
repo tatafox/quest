@@ -8,7 +8,39 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div id="preload" class="container preload">
+        <img class="preload-bg preload-bg-3" src="img/bg-010.png">
+        <img class="preload-bg preload-bg-4" src="img/bg-013.png">
+        <div class="school">
+            ГУО «Средняя школа №16 Г. Борисова имени И.В. Борисюка»
+        </div>
+        <div class="h2"h2>
+            <div>Учитель начальных классов</div>
+            Янушковская Алла Николаевна
+        </div>
+        <div class="quest-description">
+            <div class="title">Название:</div>
+            <div class="description">"Знаю и применяю в жизни"</div>
+        </div>
+        <div class="quest-description">
+            <div class="title">Направленность квеста:</div>
+            <div class="description">функциональная грамотность,  математика</div>
+        </div>
+        <div class="quest-description">
+            <div class="title">Цель:</div>
+            <div class="description">развитие функциональной грамотности на уроках математики и познавательной активности учащихся.</div>
+        </div>
+        <div class="quest-description">
+            <div class="title">Задачи:</div>
+            <div class="description">создать каждому учащемуся условия для проявления своих способностей, интеллектуальных умений;
+                формировать умения организовывать взаимосвязь своих знаний по математике в жизненных ситуациях;
+                развивать внимание, память, логическое мышление, творческое воображение;
+                воспитывать  формировать уважительное отношение к иному мнению, интерес к математике
+            </div>
+        </div>
+        <button class="button" id="startQuest">Начать квест</button>
+    </div>
+    <div id="main" class="container" style="display: none; opacity: 0;">
         <div id="assets"style="display:none;"></div>
         <img class="bg bg-1" src="img/bg-01.png">
         <img class="bg bg-2" src="img/bg-02.png">
@@ -17,7 +49,7 @@
         <h2 style="display: none; opacity: 0;"></h2>
         <p class="question" id="question">Уважаемые участники игры! Сегодня Вы будете путешествовать по станциям. Для успешного путешествия и продвижения к намеченной цели вам понадобятся знания по математике, находчивость, смекалка и сплоченность, а также ваш жизненный опыт, который вы преобрели, хотя он ещё маленький, но вспоминайте - может ответы на вопросы вы уже слышили в повседневной жизни.</p>
         <img class="question-img" id="questionImg" src="./img/1.jpg" style="display:none; opacity: 0;">
-        <button class="button"  id="start">Начать квест</button>
+        <button class="button"  id="start">Приступить к заданиям</button>
         <div id="konva-container"></div>
         <div class="task" id="task" style="display:none; opacity: 0;">
             <div class="answer" id="answerDay" style="display:none; opacity: 0;">

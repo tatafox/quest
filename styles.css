@@ -13,7 +13,7 @@ html {
     height: 100vh;
 }
 
-h1, h2 {
+h1, h2, .h2 {
     color: #ffb32c;
 }
 
@@ -28,10 +28,16 @@ h1 {
     font-size: 40px;
 }
 
-h2 {
+h2, .h2 {
     font-size: 34px;
     margin-bottom: 10px;
     transition: all 1s ease-out;
+}
+
+h2 div, .h2 div {
+    text-align: center;
+    font-size: 22px;
+    color: #ffe8c5;
 }
 
 .button {
@@ -74,6 +80,29 @@ h2 {
     line-height: 35px;
     text-align: center;
     width: 61%;
+}
+
+.quest-description {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    width: 61%;
+}
+
+.title {
+    color: #ffb32c;
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.preload .h2 {
+    margin-bottom: 30px;
+}
+
+.preload button {
+    margin-top: 30px;
 }
 
 .result {
@@ -159,7 +188,7 @@ img {
     padding: 10px;
 }
 
-.bg {
+.bg, .preload-bg {
     position: fixed;
     z-index: -1;
     width: 215px;
@@ -176,12 +205,12 @@ img {
     right: 50px;
 }
 
-.bg-3 {
+.bg-3, .preload-bg-3 {
     top: 50px;
     right: 50px;
 }
 
-.bg-4 {
+.bg-4, .preload-bg-4 {
     bottom: 50px;
     left: 50px;
 }

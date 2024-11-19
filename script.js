@@ -1,11 +1,11 @@
 import {station} from './station/station.js';
 
-const STATION_NAME = ['Станция Считалка', 'Станция Задачкина', 'Станция Архитектурная', 'Станция Ребусная', 'Станция Заморочки из бочки'];
-const STATION_TEXT = ['Добро пожаловать на Станцию Считалку! Вам нужно быстро отвечать на вопросы. За каждый правильный  ответ команда получает по 1 баллу. На выполнение всех заданий вам дается 10 минут. Вы готовы?',
-    'Добро пожаловать на Станцию Задачкину. На данном этапе надо решить задачи. За каждое правильное решенное выражения вы получаете по 3 балла. На выполнение вам дается 7 минут.',
-    'Вы прибыли на станцию Архитектурную. У бабушки Кати есть собака Тузик. Необходимо перемащая цветные геометрические фигуры собрать собачий домик по его тени. На выполнение задания у вас 5 минут. За выполнение этого задания вы получите 10 баллов',
-    'Станция Ребусная. Нужно решить математические ребусы. За каждый ответ  2 балла. У вас есть 10 минут',
-    'Станция Заморочки из бочки. Вас ждут математические загадки. За каждый ответ 1 балл. У вас есть 5 минут.'];
+const STATION_NAME = ['Станция "Считалка"', 'Станция "Задачкина"', 'Станция "Архитектурная"', 'Станция "Ребусная"', 'Станция "Заморочки из бочки"'];
+const STATION_TEXT = ['Добро пожаловать на cтанцию "Считалку"! Вам нужно быстро отвечать на вопросы. За каждый правильный  ответ команда получает по 1 баллу. На выполнение всех заданий вам дается 10 минут. Вы готовы?',
+    'Добро пожаловать на cтанцию "Задачкину". На данном этапе надо решить задачи. За каждое правильное решенное выражения вы получаете по 3 балла. На выполнение вам дается 7 минут.',
+    'Вы прибыли на станцию "Архитектурную". У бабушки Кати есть собака Тузик. Необходимо перемещая цветные геометрические фигуры собрать домик для Тузика по его тени. На выполнение задания у вас 5 минут. За выполнение этого задания вы получите 10 баллов',
+    'Станция "Ребусная". Нужно решить математические ребусы. За каждый ответ  2 балла. У вас есть 10 минут',
+    'Станция "Заморочки из бочки". Вас ждут математические загадки. За каждый ответ 1 балл. У вас есть 5 минут.'];
 const STATION_BTN_NAME = 'Приступить к заданию'
 const STATION_COUNT = 5;
 
@@ -36,16 +36,26 @@ let taskNumber = 0;
 let bgNumber = 3;
 let bgClassNumber = 3;
 let firstScreen = true;
-let timeinterval;
+let timeInterval;
 const stationName = document.querySelector('h2');
 const mainHeader = document.querySelector('h1');
 const taskElement = document.getElementById('task');
 const finalResultElement = document.getElementById('finalResult');
 const questionElement = document.getElementById('question');
 const startBtn = document.getElementById('start');
-
+const startQuestBtn = document.getElementById('startQuest');
 
 const assetImgDiv = document.getElementById('assets');
+
+startQuestBtn.addEventListener('click', () => {
+    const preloadElement = document.getElementById('preload');
+    const mainElement = document.getElementById('main');
+
+    preloadElement.style.opacity = '0';
+    preloadElement.style.display = 'none';
+    mainElement.style.opacity = '1';
+    mainElement.style.display = 'flex';
+});
 
 for (const src in sources) {
     const assetImg = document.createElement('img');
@@ -316,6 +326,11 @@ function checkAnswer(userAnswer) {
        point = 2;
    }
 
+    if (stationNumber === 4 && taskNumber === 6) {
+        debugger
+        userAnswer = userAnswer.includes(correctAnswer) ? correctAnswer : userAnswer;
+    }
+
     if (userAnswer === correctAnswer) {
         resultElement.textContent = 'Правильно!';
         resultElement.style.color = 'green';
@@ -342,16 +357,17 @@ function checkAnswer(userAnswer) {
 
 function setTimer(minutesRemaining) {
     const clock = document.getElementById('countdown');
+    clock.style.display = 'block';
     const minutesSpan = clock.querySelector(".minutes");
     const secondsSpan = clock.querySelector(".seconds");
     let secondsRemaining = 0;
 
     updateClock();
-    timeinterval = setInterval(updateClock, 1000);
+    timeInterval = setInterval(updateClock, 1000);
 
     function updateClock() {
         if (minutesRemaining === 0 && secondsRemaining === 0) {
-            clearInterval(timeinterval);
+            clearInterval(timeInterval);
             stopStation(true);
             return;
         }
@@ -372,12 +388,12 @@ function setTimer(minutesRemaining) {
 function stopStation(endTime = false) {
     const clock = document.getElementById('countdown');
 
-    clearInterval(timeinterval);
+    clock.style.display = 'none';
+
+    clearInterval(timeInterval);
 
     if (stationNumber === 2) {
         const konvaContainer = document.getElementById('konva-container');
-
-        clock.style.display = 'none';
         konvaContainer.style.display = 'none';
     }
 
