@@ -423,7 +423,7 @@ function stopStation(endTime = false) {
 
         innerText = endTime ? 'Время вышло! ' + innerText :'Поздравляем!  ' + innerText ;
         questionElement.innerText = innerText;
-        startBtn.innerText = 'Следующая станция';
+        startBtn.innerText = stationNumber === 4 ? 'Закончить' : 'Следующая станция';
         firstScreen = true;
 
         questionElement.style.opacity = '1';
